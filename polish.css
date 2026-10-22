@@ -62,3 +62,30 @@ html.lenis,html.lenis body{height:auto}html.lenis{scroll-behavior:auto!important
 .hero-tagline{position:absolute;z-index:4;top:14.8%;left:0;right:0;text-align:center;font-size:11px;letter-spacing:.13em;color:#124650;margin:0}
 .agency-credit img{width:105px;max-height:32px}.agency-credit{gap:9px}
 @media(max-width:700px){.migraine-reality{grid-template-columns:1fr;min-height:0}.reality-photo{min-height:0;aspect-ratio:1.2}.reality-photo img{height:auto;width:181.4935%;top:0}.reality-copy{padding:45px 7vw 40px}.reality-copy>.eyebrow{font-size:9px;margin-bottom:25px}.reality-copy h2{font-size:40px;margin-bottom:25px}.reality-copy p{font-size:15px}.hero-tagline{top:15.5%;font-size:8px;letter-spacing:.06em}.agency-credit img{width:92px;max-height:28px}}
+/* Logo entrance and tactile comfort cards */
+.film-stage .brand img{width:135px;height:76px;object-fit:contain}
+.site-loader{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:#e5eeef;animation:loader-failsafe .6s 4s forwards;transition:opacity .65s ease,visibility .65s;pointer-events:none}
+.loader-content{width:220px;text-align:center;animation:loader-arrive .8s cubic-bezier(.16,1,.3,1) both}
+.loader-content img{width:220px;height:110px;object-fit:contain;animation:logo-breathe 1.8s ease-in-out infinite}
+.loader-track{display:block;margin:26px auto 0;width:100px;height:2px;background:#07515618;overflow:hidden;border-radius:10px}
+.loader-track i{display:block;width:45%;height:100%;background:#075156;animation:loader-flow 1.25s ease-in-out infinite}
+.site-loader.is-ready{opacity:0;visibility:hidden}.site-loader.is-ready .loader-content{transform:translateY(-12px);transition:transform .65s ease}
+@keyframes loader-arrive{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes logo-breathe{50%{opacity:.72;transform:scale(.98)}}
+@keyframes loader-flow{from{transform:translateX(-110%)}to{transform:translateX(330%)}}
+@keyframes loader-failsafe{to{opacity:0;visibility:hidden}}
+.moment-card{--rx:0deg;--ry:0deg;transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s,border-color .45s;background-image:linear-gradient(140deg,#ffffff40,transparent);}
+.moment-card:after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,transparent 20%,#ffffff75 48%,transparent 76%);transform:translateX(-130%);opacity:0;z-index:0}
+.moment-card>*:not(.moment-glow){position:relative;z-index:1}
+.moment-card h3,.moment-card .moment-lead{transition:transform .45s,color .45s}
+.moment-card a{transition:letter-spacing .45s,color .45s}
+.moment-card:focus-within{border-color:#07515666}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+.motion .moment-card.visible:hover,.moment-card:hover{transform:perspective(900px) translateY(-8px) rotateX(var(--rx)) rotateY(var(--ry));transition-delay:0s;box-shadow:0 24px 45px #07515622,inset 0 0 0 1px #ffffff80}
+.moment-card:hover:after{animation:card-sheen .9s ease both}
+.moment-card:hover h3{transform:translateY(-3px);color:#075156}.moment-card:hover .moment-lead{transform:translateX(5px)}
+.moment-card:hover a{letter-spacing:.025em}.moment-card:hover:before{opacity:1}
+}
+@keyframes card-sheen{0%{transform:translateX(-130%);opacity:0}30%{opacity:.65}100%{transform:translateX(130%);opacity:0}}
+@media(max-width:700px){.film-stage .brand img{width:88px;height:46px}}
+@media(prefers-reduced-motion:reduce){.loader-content,.loader-content img,.loader-track i{animation:none}.site-loader,.site-loader.is-ready .loader-content{transition:none}.moment-card,.moment-card *{transition:none!important}.moment-card:after{display:none}}
