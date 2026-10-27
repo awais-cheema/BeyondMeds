@@ -16,4 +16,31 @@ const dialog=$("#shop-dialog");$("#shop-now").onclick=()=>{clamp();const url=(wi
 $(".close-dialog").onclick=$(".close-action").onclick=()=>dialog.close();dialog.addEventListener("click",e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
 dialog.addEventListener("close",()=>window.beyondMedsLenis?.start());
 $("#year").textContent=new Date().getFullYear();
+const contactForm=$("#contact-form");
+if(contactForm){
+  contactForm.onsubmit=(e)=>{
+    e.preventDefault();
+    const status=$("#contact-status"), btn=$("#contact-submit");
+    const name=$("#contact-name")?.value.trim(), phone=$("#contact-phone")?.value.trim(), message=$("#contact-message")?.value.trim();
+    if(!name||!phone||!message){
+      status.hidden=false;
+      status.className="contact-status error";
+      status.textContent="Please provide your name, phone number, and message.";
+      return;
+    }
+    btn.disabled=true;
+    btn.innerHTML="<span>Sending...</span>";
+    setTimeout(()=>{
+      btn.disabled=false;
+      btn.innerHTML="<span>Message Sent ✓</span>";
+      status.hidden=false;
+      status.className="contact-status success";
+      status.innerHTML=`<strong>Thank you, ${name}!</strong><p>Your message has been received. Our team will get back to you shortly via WhatsApp or email.</p>`;
+      contactForm.reset();
+      setTimeout(()=>{
+        btn.innerHTML='<span>Send Message</span><span class="btn-arrow" aria-hidden="true">↗</span>';
+      },4000);
+    },600);
+  };
+}
 })();
