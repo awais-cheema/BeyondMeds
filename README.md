@@ -1,44 +1,22 @@
-# BeyondMeds updated website
+# BeyondMeds — October 26 update
 
-Open index.html directly in a modern browser. No build tools or installation are required.
-The separate BeyondMeds-Preview.html embeds its images, CSS, JavaScript and fallback font and works offline.
+Open index.html in a modern browser. All website dependencies are included locally.
+Run `node build-preview.mjs` to generate the portable preview and website ZIP in the parent directory.
 
-## Included
-- The original emblem and wordmark, extracted as transparent SVG paths from the supplied brand guideline.
-- The existing navy #17232D, teal #075156, orange #FF5C03 and ice blue #E5EEEF palette.
-- A person wearing the cap in a sticky scroll-animated hero, with scene buttons and a motion pause control.
-- Six animated sections: migraine discomfort, tension headaches, sinus pressure, stress, hangovers and puffy eyes.
-- Black, blue and pink product selection using the existing colour image. The cap shape and colours have not been regenerated.
-- Quantity selection, hot/cold atmosphere controls, accordions and mobile navigation.
-- A redesigned orange product CTA. Checkout is unconnected, as it was in the supplied site; no payment or order is collected.
-- No progress bars or progress lines.
+## Hero playback
+The supplied October 26 video is 3840 × 2160 at 24 fps (144 frames). Its checkerboard was baked into the video; the frame assets have an alpha mask applied. The native-resolution subject crops are preserved in assets/hero-oct26 (2560 × 2160). Optimized playback assets are in assets/hero-playback (1280 × 1080).
 
-## Typography limitation — action required
-Syne is declared as the primary typeface, but the font download host was blocked during this session and no Syne font file was present locally.
-The offline preview therefore uses the bundled PP Mori fallback unless Syne is installed on the viewing computer.
-This is NOT a completed Syne implementation.
-To finish: supply the licensed Syne variable WOFF2 as assets/syne.woff2. Change the first @font-face source in styles.css from local("Syne") to url("assets/syne.woff2") format("woff2").
-Run node build-preview.mjs to regenerate both deliverables with the font embedded.
+The hero preloads and decodes every playback frame before dismissing the loader. A progress label shows readiness; a failed load offers Retry rather than silently dismissing the loader. Four desktop / two mobile decode workers limit transient memory. Persistent ImageBitmaps use a screen- and memory-budgeted resolution (384 MiB desktop / 180 MiB mobile maximum frame-buffer budget). No frame files are loaded or evicted during scrolling. Adjacent frames blend at fractional scroll positions; this is not AI-generated motion interpolation. The source motion remains 24 fps.
 
-## Connect purchases
-In config.js set checkoutUrls.black, checkoutUrls.blue and checkoutUrls.pink to the actual variant purchase URLs.
-The chosen quantity is added as the quantity URL parameter. Verify the target store's parameter convention before launch.
-shopUrl is an optional general fallback. Empty values open the preview dialog with selected colour and quantity.
+Lenis and hero painting share one animation loop. Painting stops when the scroll position settles; the loop pauses while the tab is hidden. Off-screen section animations pause. Reduced motion disables smooth scrolling and decorative motion.
 
-## Source assets
-person.png: existing local "Peaceful Rest with a Migraine Mask.png".
-colors.png: existing local Beyondmeds.pk/Assets/colors.png, displayed through CSS crops.
-material.png: existing local BeyondMeds/blog-2.png.
-logo.svg: vector extraction of the original emblem and wordmark from "Beyond meds brand Guideline Revised.pdf", page 3.
-fallback.woff2: existing project's PPMori-Regular.woff2.
-No external image dependencies are used in this version.
+## Purchase flow
+The product colour selector has been removed. The CTA is for the black cap, with quantity controls. The product image has a subtle CSS scroll animation in supporting browsers and remains static elsewhere. The checkout dialog shows the selected quantity and supports keyboard dismissal and focus restoration.
 
-## Source structure
-index.html — complete updated page
-styles.css — layout, motion, responsive styles
-app.js — interactions
-config.js — purchase destinations
-assets/ — images, vector logo and fallback font
-build-preview.mjs — dependency-free Node script rebuilding the preview and ZIP
+No store/payment service is configured. To enable real checkout, set checkoutUrls.black or shopUrl in config.js. Existing quantity forwarding is retained. The preview never collects payment or claims an order was placed.
 
-The earlier experimental pages are kept in the untouched original extracted folder, not served as part of this updated site.
+## Other details
+The supplied header logo, browser title, sample-testimonial disclosure, and existing fonts remain. The footer agency logo is 64 px wide on desktop and 54 px on mobile. Mobile footer content uses a compact two-column layout with credits on a separate row.
+
+Startup optimization: the Desktop preview now references the adjacent BeyondMeds folder; keep them together, or use index.html from the extracted ZIP. Hero startup waits only for its first full-quality frame, then loads coarse fallback frames and nearby frames on demand. Decoded cache is bounded to 36 frames on mobile/modest devices and 48 otherwise. Original production frame resolution and video assets are preserved. Reduced-motion mode uses a still hero. The foliage responds to cursor and scroll, with reduced-motion support.
+

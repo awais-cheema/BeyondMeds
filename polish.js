@@ -20,12 +20,21 @@ panel.addEventListener('pointermove',e=>{if(reduce.matches||e.pointerType!=='mou
 show(0);
 })();
 
-// Wait for the opening image, with a bounded, non-blocking exit.
 (() => {
- const loader=document.querySelector('.site-loader');if(!loader)return;
- const poster=document.querySelector('.film-poster');
- const ready=poster?.decode?poster.decode().catch(()=>{}):Promise.resolve();
- const minimum=new Promise(resolve=>setTimeout(resolve,matchMedia('(prefers-reduced-motion: reduce)').matches?0:650));
- const finish=()=>{loader.classList.add('is-ready');setTimeout(()=>loader.remove(),700);};
- Promise.race([Promise.all([ready,minimum]),new Promise(resolve=>setTimeout(resolve,2500))]).then(finish);
+ if(!('IntersectionObserver' in window))return;
+ const observer=new IntersectionObserver(entries=>entries.forEach(entry=>entry.target.classList.toggle('outside-view',!entry.isIntersecting)),{rootMargin:'160px'});
+ document.querySelectorAll('main>section:not(.film-story)').forEach(section=>observer.observe(section));
+})();
+
+(() => {
+ const product=document.querySelector('.product-showcase');
+ if(!product)return;
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ let active=false,frame=0,px=0,py=0;
+ function draw(){frame=0;if(reduced.matches){product.style.setProperty('--leaf-shift','0px');product.style.setProperty('--leaf-x','0px');return;}const r=product.getBoundingClientRect(),p=Math.max(0,Math.min(1,(innerHeight-r.top)/(innerHeight+r.height)));product.style.setProperty('--leaf-shift',((p-.5)*(innerWidth<701?35:90)+py*24).toFixed(2)+'px');}
+ product.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||reduced.matches)return;const r=product.getBoundingClientRect();px=(e.clientX-r.left)/r.width-.5;py=(e.clientY-r.top)/r.height-.5;product.style.setProperty('--leaf-x',(px*38)+'px');schedule();},{passive:true});
+ product.addEventListener('pointerleave',()=>{px=py=0;product.style.setProperty('--leaf-x','0px');schedule();});
+ function schedule(){if(active&&!frame)frame=requestAnimationFrame(draw);}
+ new IntersectionObserver(entries=>{active=entries[0].isIntersecting;schedule();},{rootMargin:'100px'}).observe(product);
+ addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule,{passive:true});reduced.addEventListener('change',draw);
 })();

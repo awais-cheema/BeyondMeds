@@ -1,12 +1,3 @@
-# BeyondMeds polished site
+October 26: new 4K-source video, native subject-crop masters plus optimized transparent playback frames; complete-sequence preload with actual progress; persistent ImageBitmaps and a single Lenis/render loop; off-screen animation pause; no colour selector; scroll-animated single-cap CTA; redesigned checkout preview; compact responsive footer. Checkout remains unconnected. See README.md for source dimensions, playback budgets and configuration.
 
-Lenis 1.3.27 is bundled locally with its license and embedded into the standalone preview. Wheel scroll uses lerp 0.065 and wheel multiplier 0.85; hero frames track the actual scroll position without a second smoothing delay. Touch scrolling stays native. Reduced-motion preference disables Lenis smoothing. Transparent 1080p-upscaled video frames retain the source 720p detail limitations.
-
-Removed hero dot, scroll prompt, pause button and material-image caption. Hero arrows use centered SVG icons. Product CTA text is white. Navigation links to About, Testimonials and Contact. Six comfort cards have pointer-following light and distinct icon hover animations, with reduced-motion and keyboard-focus alternatives.
-
-The interactive testimonials carousel now contains fictional sample personas and quotes, prominently labeled as illustrative and not verified reviews. Replace samples with real approved reviews before publishing. Supports selector cards, next/previous arrows, keyboard arrows, touch swipes and reduced-motion preferences. The connection section was removed; Contact navigation now targets the footer. Footer includes the supplied Techsolvix logo and credit. The supplied BeyondMeds JPG favicon is embedded in the portable preview.
-
-Verified standalone preview on desktop and mobile: no script errors or horizontal overflow, Lenis present, wheel-to-video frame movement, working testimonial controls, SVG arrow centering and white CTA text.
-
-Added the supplied migraine reference as a responsive photo-and-live-text section immediately after the statement section, with a source link for the prevalence statistic. Updated the hero and footer tagline to Beyond Pills, Beyond Pain. Reduced the agency logo to 105px desktop and 92px mobile. Hero canvas blends adjacent transparent frames for smoother fractional scroll positions and preloads ten frames ahead. All existing fonts remain unchanged per the user's follow-up.
-
+Validation: desktop 1440×900 and mobile 390×844 at 2× pixel density, all 144 frames ready before loader dismissal; forward/reverse scrub, quantity=2 checkout summary, Escape dismissal, and no horizontal overflow or page-script errors. Local preload: 4.05s desktop / 3.02s mobile; 95th-percentile animation-frame interval 16.9ms on both in a 2.4-second scroll sample. These are local browser measurements, not network or universal-device guarantees.
