@@ -5,9 +5,9 @@ document.querySelectorAll('.moment-card').forEach(card=>{
  let raf=0;card.addEventListener('pointermove',event=>{if(reduce.matches||event.pointerType==='touch')return;cancelAnimationFrame(raf);raf=requestAnimationFrame(()=>{const r=card.getBoundingClientRect();card.style.setProperty('--mx',((event.clientX-r.left)/r.width*100)+'%');card.style.setProperty('--my',((event.clientY-r.top)/r.height*100)+'%');card.style.setProperty('--rx',((.5-(event.clientY-r.top)/r.height)*5)+'deg');card.style.setProperty('--ry',(((event.clientX-r.left)/r.width-.5)*5)+'deg');});});
 });
 const reviews=[
-{title:'My favourite evening pause.',quote:'“I keep it ready for the end of a long day. The cool feel and soft fit make those few quiet minutes on the sofa something I really look forward to.”',name:'Amelia M.',initials:'AM'},
-{title:'A little space, just for me.',quote:'“Between work and everything else, I rarely stop. Putting on the cap is my reminder to put my phone down, get comfortable and enjoy a quiet break.”',name:'Jordan L.',initials:'JL'},
-{title:'A softer start to the day.',quote:'“I like how soft the fabric feels and how easy it is to make part of my morning routine. A little time to myself before the day gets busy.”',name:'Sofia K.',initials:'SK'}
+{title:'My favourite evening pause.',quote:'“After a long day, I keep it in the fridge so it\'s ready when I get home. The cool, soft fit gives me a few quiet minutes with my chai.”',name:'Ayesha R.',initials:'AR'},
+{title:'A moment to reset.',quote:'“Work gets heavy and screens don\'t help. I wear it for ten minutes in a dark room and it helps me slow down. It\'s part of my routine now.”',name:'Hamza Q.',initials:'HQ'},
+{title:'A gentler start to the day.',quote:'“Summer mornings can start with a heavy head. The cap is soft, fits well, and the cooling feels really comforting. Easy to store too.”',name:'Sana M.',initials:'SM'}
 ];let current=0;
 const panel=document.querySelector('.story-panel');
 function show(index){current=(index+reviews.length)%reviews.length;const r=reviews[current];document.querySelector('#story-theme').textContent=r.title;document.querySelector('#story-quote').textContent=r.quote;document.querySelector('#story-author').textContent=r.name;document.querySelector('#story-avatar').textContent=r.initials;document.querySelector('#story-count').textContent=String(current+1).padStart(2,'0');panel.style.setProperty('--review-progress',String((current+1)/reviews.length));document.querySelectorAll('[data-story]').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.story===current)));panel.classList.remove('changing');void panel.offsetWidth;panel.classList.add('changing');}
@@ -31,8 +31,8 @@ show(0);
  if(!product)return;
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
  let active=false,frame=0,px=0,py=0;
- function draw(){frame=0;if(reduced.matches){product.style.setProperty('--leaf-shift','0px');product.style.setProperty('--leaf-x','0px');return;}const r=product.getBoundingClientRect(),p=Math.max(0,Math.min(1,(innerHeight-r.top)/(innerHeight+r.height)));product.style.setProperty('--leaf-shift',((p-.5)*(innerWidth<701?35:90)+py*24).toFixed(2)+'px');}
- product.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||reduced.matches)return;const r=product.getBoundingClientRect();px=(e.clientX-r.left)/r.width-.5;py=(e.clientY-r.top)/r.height-.5;product.style.setProperty('--leaf-x',(px*38)+'px');schedule();},{passive:true});
+ function draw(){frame=0;if(reduced.matches){product.style.setProperty('--leaf-shift','0px');product.style.setProperty('--leaf-x','0px');return;}const r=product.getBoundingClientRect(),p=Math.max(0,Math.min(1,(innerHeight-r.top)/(innerHeight+r.height)));product.style.setProperty('--leaf-shift',((p-.5)*(innerWidth<701?35:90)+py*48).toFixed(2)+'px');}
+ product.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||reduced.matches)return;const r=product.getBoundingClientRect();px=(e.clientX-r.left)/r.width-.5;py=(e.clientY-r.top)/r.height-.5;product.style.setProperty('--leaf-x',(px*72)+'px');schedule();},{passive:true});
  product.addEventListener('pointerleave',()=>{px=py=0;product.style.setProperty('--leaf-x','0px');schedule();});
  function schedule(){if(active&&!frame)frame=requestAnimationFrame(draw);}
  new IntersectionObserver(entries=>{active=entries[0].isIntersecting;schedule();},{rootMargin:'100px'}).observe(product);
