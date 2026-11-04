@@ -18,3 +18,9 @@ dialog{border:0;border-radius:28px;background:var(--ice);color:var(--navy);paddi
 @media(max-width:360px){.header-cta{font-size:9px;padding:7px 10px}.header{gap:6px}.hero-tabs button{padding:6px 9px}.product-tags span{padding:6px 8px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.hero-story{height:auto}.hero-stage{position:relative;top:0}.motion .reveal{opacity:1;transform:none}.hero-photo-wrap,.hero-photo-wrap img{transform:none}}
 .motion-paused *, .motion-paused *:before,.motion-paused *:after{animation-play-state:paused!important}.motion-paused .reveal{opacity:1;transform:none}
+
+
+
+.whatsapp-float-container { z-index: 99999; pointer-events: auto; }
+.whatsapp-float-btn { touch-action: manipulation; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.whatsapp-pulse, .whatsapp-icon-circle, .whatsapp-label { pointer-events: none; }

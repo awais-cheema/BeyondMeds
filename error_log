@@ -1,0 +1,14 @@
+[15-Oct-2026 19:14:17 UTC] WordPress database error Table 'soft_loginizer_logs' already exists for query CREATE TABLE `soft_loginizer_logs` (
+				`username` varchar(255) NOT NULL DEFAULT '',
+				`time` int(10) NOT NULL DEFAULT '0',
+				`count` int(10) NOT NULL DEFAULT '0',
+				`lockout` int(10) NOT NULL DEFAULT '0',
+				`ip` varchar(255) NOT NULL DEFAULT '',
+				`url` varchar(255) NOT NULL DEFAULT '',
+				UNIQUE KEY `ip` (`ip`)
+			) DEFAULT CHARSET=utf8; made by require('wp-blog-header.php'), require_once('wp-load.php'), require_once('wp-config.php'), require_once('wp-settings.php'), do_action('plugins_loaded'), WP_Hook->do_action, WP_Hook->apply_filters, loginizer_load_plugin, loginizer_update_check, loginizer_activation
+[15-Oct-2026 19:14:17 UTC] PHP Warning:  Undefined array key "titles_single_titles" in /home/gqniibfoeu/beyondmeds.pk/wp-content/plugins/siteseo/siteseo.php on line 212
+[15-Oct-2026 19:14:17 UTC] PHP Warning:  Undefined array key "titles_single_titles" in /home/gqniibfoeu/beyondmeds.pk/wp-content/plugins/siteseo/siteseo.php on line 212
+[22-Oct-2026 10:26:53 UTC] PHP Warning:  Constant WP_DEBUG already defined in /home/gqniibfoeu/beyondmeds.pk/wp-config.php on line 90
+[22-Oct-2026 10:34:21 UTC] Cron reschedule event error for hook: extendify_images_importer_light, Error code: invalid_schedule, Error message: Event schedule does not exist., Data: {"schedule":"extendify_every_ten_minutes","args":[],"interval":600}
+[28-Oct-2026 15:40:56 UTC] PHP Warning:  Constant WP_DEBUG already defined in /home/gqniibfoeu/beyondmeds.pk/wp-config.php on line 90

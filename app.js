@@ -12,7 +12,7 @@ $$(".detail-copy details").forEach(d=>d.addEventListener("toggle",()=>{if(d.open
 $$("[data-temp]").forEach(b=>b.onclick=()=>{const warm=b.dataset.temp==="warm";$("#ritual").classList.toggle("warm",warm);$$("[data-temp]").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));$("#temperature-description").textContent=warm?"Gentle warmth, for a comforting pause.":"Cooling contact, for a quieter moment.";});
 const quantity=$("#quantity");function clamp(){quantity.value=String(Math.max(1,Math.min(10,Math.trunc(Number(quantity.value)||1))));}
 $("#minus").onclick=()=>{quantity.value=Number(quantity.value)-1;clamp();};$("#plus").onclick=()=>{quantity.value=Number(quantity.value)+1;clamp();};quantity.onchange=clamp;
-const dialog=$("#shop-dialog");$("#shop-now").onclick=()=>{clamp();const url=(window.BEYONDMEDS_CONFIG?.checkoutUrls||{})[selected]||window.BEYONDMEDS_CONFIG?.shopUrl;if(url){try{const dest=new URL(url,location.href);if(dest.protocol==="https:"||dest.protocol==="http:"){dest.searchParams.set("quantity",quantity.value);location.assign(dest.href);return;}}catch{}}$("#order-summary").textContent=quantity.value+" × BeyondMeds Migraine Relief Cap · "+selected.charAt(0).toUpperCase()+selected.slice(1);dialog.showModal();window.beyondMedsLenis?.stop();};
+const dialog=$("#shop-dialog");
 $(".close-dialog").onclick=$(".close-action").onclick=()=>dialog.close();dialog.addEventListener("click",e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
 dialog.addEventListener("close",()=>window.beyondMedsLenis?.start());
 $("#year").textContent=new Date().getFullYear();

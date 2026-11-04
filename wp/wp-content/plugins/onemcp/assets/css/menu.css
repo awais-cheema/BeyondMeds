@@ -1,0 +1,19 @@
+/**
+ * Admin menu icon styles.
+ *
+ * @package OneMCP
+ */
+
+#toplevel_page_onemcp .wp-menu-image img {
+width: 20px;
+height: 20px;
+padding: 7px 0 0 0;
+opacity: 0.85;
+transition: opacity 0.2s ease;
+}
+
+#toplevel_page_onemcp:hover .wp-menu-image img,
+#toplevel_page_onemcp.current .wp-menu-image img,
+#toplevel_page_onemcp.wp-has-current-submenu .wp-menu-image img {
+opacity: 1;
+}
