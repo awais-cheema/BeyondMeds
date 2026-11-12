@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk=self.webpackChunk||[]).push([["2135"],{37690(a){a.exports=JSON.parse('{"alertError":{"defaultTitle":"Terjadi kesalahan!","defaultMessage":"Mohon segarkan halaman ini.","refreshBtn":"Segarkan","okBtn":"Oke"},"errorBoundary":{"default":{"title":"Terjadi kesalahan!","message":"Mohon segarkan halaman ini.","btn":"Segarkan"}}}')}}]);

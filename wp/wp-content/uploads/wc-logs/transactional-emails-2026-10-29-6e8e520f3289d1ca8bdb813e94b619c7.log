@@ -1,3 +1,0 @@
-2026-10-29T13:09:10+00:00 WARNING Email "admin_payment_gateway_enabled" failed to send: Could not instantiate mail function. CONTEXT: {"email_type":"admin_payment_gateway_enabled","status":"failed","recipient":"beyondmeds","WC_Gateway_COD":null}
-2026-10-29T13:46:48+00:00 WARNING Email "new_order" for order #76 failed to send: Could not instantiate mail function. CONTEXT: {"email_type":"new_order","status":"failed","recipient":"beyondmeds","order":76}
-2026-10-29T13:46:48+00:00 WARNING Email "customer_processing_order" for order #76 failed to send: Could not instantiate mail function. CONTEXT: {"email_type":"customer_processing_order","status":"failed","recipient":"guest","order":76}

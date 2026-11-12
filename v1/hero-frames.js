@@ -1,1 +1,0 @@
-(()=>{const root=new URL('.',document.currentScript.src);window.BEYONDMEDS_HERO_FRAMES=Array.from({length:144},(_,i)=>new URL('assets/'+(matchMedia('(max-width:700px)').matches?'hero-mobile':'hero-desktop')+'/frame-'+String(i+1).padStart(3,'0')+'.webp',root).href);})();
