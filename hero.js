@@ -30,7 +30,7 @@
 
   function updateProgress() {
     loader.style.setProperty('--loaded', loaded / sources.length);
-    status.textContent = `Loading animation · ${loaded}/${sources.length}`;
+    status.textContent = `${Math.round(loaded / sources.length * 100)}%`;
   }
 
   async function decode(index) {

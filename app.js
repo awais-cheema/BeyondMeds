@@ -5,9 +5,10 @@ const reduced=matchMedia("(prefers-reduced-motion: reduce)");
 let paused=reduced.matches, selected="black";
 if("IntersectionObserver" in window&&!paused){document.documentElement.classList.add("motion");const observer=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");observer.unobserve(e.target);}}),{threshold:.08});$$(".reveal").forEach(el=>observer.observe(el));}else $$(".reveal").forEach(el=>el.classList.add("visible"));
 
-const menu=$(".menu-toggle");function closeMenu(){menu.setAttribute("aria-expanded","false");menu.setAttribute("aria-label","Open menu");$("#navigation").classList.remove("open");}
-menu.onclick=()=>{const open=menu.getAttribute("aria-expanded")!=="true";menu.setAttribute("aria-expanded",String(open));menu.setAttribute("aria-label",open?"Close menu":"Open menu");$("#navigation").classList.toggle("open",open);};
-$$("#navigation a").forEach(a=>a.onclick=closeMenu);addEventListener("keydown",e=>{if(e.key==="Escape")closeMenu();});
+const menu=$(".menu-toggle"), menuPanel=$("#menu-panel");function closeMenu(){menu.setAttribute("aria-expanded","false");menu.setAttribute("aria-label","Open menu");menuPanel.setAttribute("aria-hidden","true");menuPanel.inert=true;}
+menu.onclick=()=>{const open=menu.getAttribute("aria-expanded")!=="true";menu.setAttribute("aria-expanded",String(open));menu.setAttribute("aria-label",open?"Close menu":"Open menu");menuPanel.setAttribute("aria-hidden",String(!open));menuPanel.inert=!open;};
+$$("#navigation a, #menu-panel a").forEach(a=>a.onclick=closeMenu);addEventListener("keydown",e=>{if(e.key==="Escape")closeMenu();});
+document.addEventListener("click",e=>{if(menu.getAttribute("aria-expanded")==="true"&&!menu.parentElement.contains(e.target))closeMenu();});
 $$(".detail-copy details").forEach(d=>d.addEventListener("toggle",()=>{if(d.open)$$(".detail-copy details").forEach(other=>{if(other!==d)other.open=false;});}));
 $$("[data-temp]").forEach(b=>b.onclick=()=>{const warm=b.dataset.temp==="warm";$("#ritual").classList.toggle("warm",warm);$$("[data-temp]").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));$("#temperature-description").textContent=warm?"Gentle warmth, for a comforting pause.":"Cooling contact, for a quieter moment.";});
 const quantity=$("#quantity");function clamp(){quantity.value=String(Math.max(1,Math.min(10,Math.trunc(Number(quantity.value)||1))));}
