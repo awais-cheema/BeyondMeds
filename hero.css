@@ -31,7 +31,6 @@
 @media(max-width:700px){.hero-word{top:20%;font-size:12.6vw}.film-poster,#comfort-frames{width:300%;left:-100%;height:85%;bottom:0}}
 /* Quality and continuity refinements */
 .film-story,.film-stage,.film-story+.statement{background:#91b7ba}
-.film-stage{will-change:opacity}
 .film-media{inset:3.4% 0 3.7%;border-radius:60px;overflow:hidden;isolation:isolate}
 .film-poster,#comfort-frames{width:105%;left:-2.5%;height:95%;bottom:-10%;image-rendering:auto}
 .hero-pill{min-width:0;padding:10px 12px 10px 24px;gap:24px;font-size:18px;letter-spacing:-.025em;bottom:11%}

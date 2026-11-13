@@ -3,6 +3,9 @@
 const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
 const reduced=matchMedia("(prefers-reduced-motion: reduce)");
 let paused=reduced.matches, selected="black";
+function hideFailedImage(image){image.alt="";image.hidden=true;}
+document.addEventListener("error",event=>{if(event.target instanceof HTMLImageElement)hideFailedImage(event.target);},true);
+$$("img").forEach(image=>{if(image.complete&&!image.naturalWidth)hideFailedImage(image);});
 if("IntersectionObserver" in window&&!paused){document.documentElement.classList.add("motion");const observer=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");observer.unobserve(e.target);}}),{threshold:.08});$$(".reveal").forEach(el=>observer.observe(el));}else $$(".reveal").forEach(el=>el.classList.add("visible"));
 
 const menu=$(".menu-toggle"), menuPanel=$("#menu-panel");function closeMenu(){menu.setAttribute("aria-expanded","false");menu.setAttribute("aria-label","Open menu");menuPanel.setAttribute("aria-hidden","true");menuPanel.inert=true;}
@@ -13,9 +16,6 @@ $$(".detail-copy details").forEach(d=>d.addEventListener("toggle",()=>{if(d.open
 $$("[data-temp]").forEach(b=>b.onclick=()=>{const warm=b.dataset.temp==="warm";$("#ritual").classList.toggle("warm",warm);$$("[data-temp]").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));$("#temperature-description").textContent=warm?"Gentle warmth, for a comforting pause.":"Cooling contact, for a quieter moment.";});
 const quantity=$("#quantity");function clamp(){quantity.value=String(Math.max(1,Math.min(10,Math.trunc(Number(quantity.value)||1))));}
 $("#minus").onclick=()=>{quantity.value=Number(quantity.value)-1;clamp();};$("#plus").onclick=()=>{quantity.value=Number(quantity.value)+1;clamp();};quantity.onchange=clamp;
-const dialog=$("#shop-dialog");
-$(".close-dialog").onclick=$(".close-action").onclick=()=>dialog.close();dialog.addEventListener("click",e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
-dialog.addEventListener("close",()=>window.beyondMedsLenis?.start());
 $("#year").textContent=new Date().getFullYear();
 const contactForm=$("#contact-form");
 if(contactForm){

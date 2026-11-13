@@ -89,7 +89,7 @@
       moving = display !== target;
     }
     lastTime = time;
-    if (lenis || moving) schedule();
+    if (lenis?.isScrolling === 'smooth' || moving) schedule();
   }
 
   function setupMotion() {
@@ -171,6 +171,11 @@
     }, { rootMargin: '150px' }).observe(story);
   }
   addEventListener('scroll', schedule, { passive: true });
+  addEventListener('wheel', schedule, { passive: true });
+  addEventListener('touchmove', schedule, { passive: true });
+  document.addEventListener('click', event => {
+    if (event.target instanceof Element && event.target.closest('a[href^="#"], .comfort-nav button')) schedule();
+  }, true);
   addEventListener('resize', measure, { passive: true });
   reduce.addEventListener('change', () => { if (ready) setupMotion(); });
   document.addEventListener('visibilitychange', () => {
