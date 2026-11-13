@@ -31,8 +31,8 @@ show(0);
  if(!product)return;
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
  let active=false,frame=0,px=0,py=0;
- function draw(){frame=0;if(reduced.matches){product.style.setProperty('--leaf-shift','0px');product.style.setProperty('--leaf-x','0px');return;}const r=product.getBoundingClientRect(),p=Math.max(0,Math.min(1,(innerHeight-r.top)/(innerHeight+r.height)));product.style.setProperty('--leaf-shift',((p-.5)*(innerWidth<701?35:90)+py*48).toFixed(2)+'px');}
- product.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||reduced.matches)return;const r=product.getBoundingClientRect();px=(e.clientX-r.left)/r.width-.5;py=(e.clientY-r.top)/r.height-.5;product.style.setProperty('--leaf-x',(px*72)+'px');schedule();},{passive:true});
+ function draw(){frame=0;if(reduced.matches){product.style.setProperty('--leaf-shift','0px');product.style.setProperty('--leaf-x','0px');return;}const r=product.getBoundingClientRect(),p=Math.max(0,Math.min(1,(innerHeight-r.top)/(innerHeight+r.height)));product.style.setProperty('--leaf-shift',((p-.5)*(innerWidth<701?35:90)+py*130).toFixed(2)+'px');}
+ product.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||reduced.matches)return;const r=product.getBoundingClientRect();px=(e.clientX-r.left)/r.width-.5;py=(e.clientY-r.top)/r.height-.5;product.style.setProperty('--leaf-x',(px*200)+'px');schedule();},{passive:true});
  product.addEventListener('pointerleave',()=>{px=py=0;product.style.setProperty('--leaf-x','0px');schedule();});
  function schedule(){if(active&&!frame)frame=requestAnimationFrame(draw);}
  new IntersectionObserver(entries=>{active=entries[0].isIntersecting;schedule();},{rootMargin:'100px'}).observe(product);
